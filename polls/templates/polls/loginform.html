@@ -1,0 +1,85 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title>ERP VOTE | Login</title>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.css' %}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'dist/css/loginstlye.css' %}">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper" id="id02">
+    <li class="nav-item">
+        <a href="/frontdex" class="nav-link">
+          <i class="nav-icon fas fa-arrow-circle-left"></i>
+        </a>
+      </li>
+	<div class="container">
+        
+		<h1>ลงทะเบียน เข้าใช้งาน </h1>
+	    <div class="imgcontainer">
+            <img src="{% static 'dist/img/SWUVOTE_logo.png' %}" alt="Avatar" class="avatar">
+        </div>
+        <form class="form" action="loginform" method="POST">  
+          {% csrf_token %}      
+            {{form.username}}
+            {{form.password}}
+           
+            <input class="sub" type="submit" value="Login">
+
+            {% for message in massages %}
+               <p id="message">{{messages}}</p>
+               {% endfor %}
+
+              <div class="mt-4">
+                <div class="d-flex justify-content-center links">
+                  Don't have an account? <a href="/register" class="ml-2">Sign Up</a>
+                </div>
+            
+              </div>
+          
+          </form>
+	</div>
+	<!--bubble wallpaper-->
+        <div class="bubble x1"></div>
+        <div class="bubble x2"></div>
+        <div class="bubble x3"></div>
+        <div class="bubble x4"></div>
+        <div class="bubble x5"></div>
+        <div class="bubble x6"></div>
+        <div class="bubble x7"></div>
+        <div class="bubble x8"></div>
+        <div class="bubble x9"></div>
+        <div class="bubble x10"></div>
+    <!--END bubble -->
+</div>
+<script>
+//Query All input fields
+var form_fields = document.getElementsByTagName('input')
+form_fields[1].placeholder='Buasri ID';
+form_fields[2].placeholder='Password';
+
+
+for (var field in form_fields){	
+form_fields[field].className += ' form-control'
+
+
+}
+</script>
+<!-- jQuery -->
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'dist/js/adminlte.min.js' %}"></script>
+</body>
+</html>

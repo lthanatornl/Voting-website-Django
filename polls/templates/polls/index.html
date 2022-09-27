@@ -1,0 +1,140 @@
+{% extends 'polls/test.html' %}
+{% load static %}
+{% block content %}
+   <!-- Sidebar -->
+   <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 mb-3 d-flex">
+      <div class="image">
+      {% if user.userprofile.profile.url%}
+        <img src="{{ user.userprofile.profile.url }}" class="img-circle elevation-2" alt="User Image">
+      {% else %}
+        <img src="{% static 'dist/img/a.png'%}" class="img-circle elevation-2" alt="User Image">
+        {% endif %}
+      </div>
+    </div>     
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
+        <li class="nav-item has-treeview menu-open">
+          <p class="nav-link active">
+            <i class="nav-icon fas fa-home"></i>
+              หน้าหลัก
+            </p>
+        </li>
+        <li class="nav-item">
+          <a href="/managevote" class="nav-link">
+            <i class="nav-icon fas fa-check-square"></i>
+            <p>
+              จัดการรายการโหวต
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/managepoll" class="nav-link">
+              <i class="nav-icon fas fa-poll"></i>
+              <p>
+                จัดการรายการโพล
+              </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/manageadmin" class="nav-link">
+            <i class="nav-icon fas fa-address-book"></i>
+            <p>
+              จัดการผู้ใช้งาน
+            </p>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark"><b>DashBoard Vote</b></h1>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <div class="content">
+    <div class="container-fluid">
+    <div class="row">
+    <div class="col-lg-6">
+      <div class="info-box">
+        <span class="info-box-icon bg-blue"><i class="fa fa-star"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text">Events</span>
+          <span class="info-box-number">จำนวนรายการโหวตทั้งหมด {{eventcount}}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    <!-- /.col -->
+    
+      <div class="info-box">
+        <span class="info-box-icon bg-red"><i class="fa fa-users"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text">Members</span>
+          <span class="info-box-number">จำนวนสมาชิกทั้งหมด {{usercount}}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    
+    <!-- /.col -->
+    <!-- fix for small devices only -->
+    <div class="col-lg-6">
+      <div class="info-box">
+        <span class="info-box-icon bg-green"><i class="fa fa-signal"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text">Votes</span>
+          <span class="info-box-number">จำนวนรายการโหวตที่เปิดอยู่ทั้งหมด {{votecount}}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    
+    <!-- /.col -->
+      <div class="info-box">
+        <span class="info-box-icon bg-yellow"><i class="fa fa-user"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text">Polls</span>
+          <span class="info-box-number">จำนวนโพลทั้งหมด {{pollcount}}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+  </div>
+  </div>
+</div><!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+  <!-- Control sidebar content goes here -->
+  <div class="p-3">
+    <h5>Title</h5>
+    <p>Sidebar content</p>
+  </div>
+</aside>
+<!-- /.control-sidebar -->
+{% endblock %}

@@ -1,0 +1,176 @@
+{% load static %}
+{% load user_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>SWU | VOTE </title>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.css' %}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'dist/css/styles.css' %}">
+     
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<script>
+    // This code activates flatpickr on fields with the 'datetimefield' class when the document has loaded
+    window.addEventListener("DOMContentLoaded", function () {
+        flatpickr(".datetimefield", {
+            enableTime: true,
+            enableSeconds: true,
+            dateFormat: "Y-m-d H:i:S",
+        });
+    });
+</script>
+  <style>
+    .mySlides {display:none}
+    .w3-left, .w3-right, .w3-badge {cursor:pointer}
+    .w3-badge {height:13px;width:13px;padding:0}
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row flex-nowrap justify-content-between align-items-center">
+      <div class="col-4 pt-1">
+      
+      </div>
+      <div class="col-4 text-center">
+        <img class="blog-header-logo text-dark" src="{% static 'dist/img/SWUVOTE_logo.png' %}">
+      </div>
+      <div class="col-4 d-flex justify-content-end align-items-center">
+      {% if user.is_authenticated %}
+        <li class="nao-item d-none d-sm-inline-block">
+        <p class="nav-linz">ยินดีต้อนรับ, {{request.user.first_name}}  </p>
+      </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="{% url 'logoutUser' %}" type="button" class="btn btn-red">LOGOUT</a>
+      </li>
+      {% else %}
+        <div class="col-md-3 text-end">
+          <a href="/loginform" type="button" class="btn btn-primary">LOGIN</a>
+      </div>
+      {% endif %}
+      </div>
+    </div>
+  {% block content %}
+        <header class="d-flex justify-content-center py-3 border-bottom">
+          <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="#" class="nav-linv px-2 link-active">ABOUT</a></li>
+            <li><a href="/vote" class="nav-link px-2 link-dark">VOTE</a></li>
+            {% if request.user|has_group:'votecreator' %}
+            <li><a href="/createvote" class="nav-link px-2 link-dark">CREATEVOTE</a></li>
+            {% else %}
+
+            {% endif %}
+          </ul>
+
+        </header>
+</div>
+
+    <!--logo banner--> 
+      <div class="banners ">
+     
+        <img class="mySlides w3-animate-left" src="{% static 'dist/img/banner.jpg' %}">
+        <img class="mySlides w3-animate-left" src="{% static 'dist/img/banner_2.jpg' %}">
+        <img class="mySlides w3-animate-left" src="{% static 'dist/img/banner_6.jpg' %}">
+        <img class="mySlides w3-animate-left" src="{% static 'dist/img/banner_4.jpg' %}">
+        <h2 class="h2"><span><i class="fas fa-vote-yea"></i>  SWU | VOTE <br></span></h2>
+        <h3 class="h3"><span> เว็บไซต์เพื่อการออกความเห็นอย่างสร้างสรรค์</span></h3>
+        <div class="convote">
+  
+  <div class="votetent">
+    <h1>เกี่ยวกับ SWU | VOTE</h1>
+    <p>เว็บไซต์นี้เป็นโครงงานที่จัดทำขึ้นจากการใช้ความรู้ที่ได้จากการฝึกงานกับ SWU ERP โดยจะเป็นเว็บไซต์ที่ทำการทดสอบการสร้างความสัมพันธ์ต่างๆ ของฐานข้อมูล นำมาประยุกต์ใช้กับระบบเลือกตั้ง </p>
+  </div>
+</div>
+        <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle">
+            <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
+            <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
+            <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+            <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(4)"></span>
+          </div>
+          
+      </div>
+     
+    <!--END Banner-->
+<!--JS-->
+      <script>
+          // Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+//end modal
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function currentDiv(n) {
+  showDivs(slideIndex = n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" w3-white", "");
+  }
+  x[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " w3-white";
+}
+          
+      var myIndex = 0;
+      carousel();
+      
+      function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+          x[i].style.display = "none";  
+        }
+        myIndex++;
+        if (myIndex > x.length) {myIndex = 1}    
+        x[myIndex-1].style.display = "block";  
+        setTimeout(carousel, 9500);    
+      }
+      </script>
+<!--END JS-->
+ 
+      {% endblock%}
+   <div id="redliner">
+      <div class="tm-col-footer">
+                <footer class="tm-site-footer text-right">
+                    <p class="mb-0">Copyright 2021 C/C/C Co. 
+                    
+                    | Design: <a rel="nofollow" target="_parent" href="http://erp.op.swu.ac.th/Default.aspx?tabid=16577" class="tm-text-link">GYZE</a></p>
+                </footer>
+        </div>  
+        </div> 
+
+
+</body>
+  
+
+</html>

@@ -1,0 +1,68 @@
+{% extends 'polls/frontdex.html' %}
+{% load static %}
+{% load user_tags %}
+{% block content %}
+
+<header class="d-flex justify-content-center py-3 border-bottom">
+            <li class="nav-linv px-2 link-active">Election VOTE</a></li>
+          </ul>
+        </header>
+</div>
+
+
+<!-- Navigation-->
+<div class="banner-wall">
+<img class="img-tent" src="{% static 'dist/img/rain.gif' %}">
+    <div class="centered ">
+        <div class="panelp panel-default">
+            <div class="panel-heading">
+                <ul class="backen col-12 col-md-auto mb-2 ">
+            <bli class="nav-item">
+        <a href="/vote">
+          <i class="vote-icon fas fa-arrow-circle-left"></i>
+        </a>
+      </bli>
+            </div>
+        </ul>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2 >{{ election.name }}</h2>
+                    </div>
+                </div>
+<ul class="list-group" id="style-8" style="height: 260px !important; overflow: scroll; overflow-x: hidden; ">
+                <form method="POST" action="{% url 'letelect' election.id %}">
+        {% csrf_token %}
+    {% for candy in election.candys %}
+      <div class="candy-column">
+      <div class="candy-card">
+  <img class="card-img-candy" src="{{candy.image.url}}">
+  <div class="card-body">
+    <h5 class="card-title text-dark">
+    <div class="radio">
+    <input type="radio" name="candidate" value="{{candy.id}}">
+        {{candy.first_name}} {{candy.last_name}}</h5>
+  </div>
+</div>
+</div>
+
+
+
+    {% empty %}
+        <p>There is no Candidate available for this Election.</p>
+    {% endfor %}
+        <input class="w3-button w3-section w3-red w3-ripple w3-padding" type="submit" name="Create vote" value="vote" >
+    </form>
+    </ul>
+            
+    
+    
+</div>
+<!-- Section-->
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

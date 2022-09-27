@@ -1,0 +1,117 @@
+{% extends 'polls/frontdex.html' %}
+{% load static %}
+{% load user_tags %}
+{% block content %}
+
+<header class="d-flex justify-content-center py-3 border-bottom">
+          <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="/frontdex" class="nav-link px-2 link-dark">ABOUT</a></li>
+            <li><a href="#" class="nav-linv px-2 link-active">VOTE</a></li>
+            {% if request.user|has_group:'votecreator' %}
+            <li><a href="/createvote" class="nav-link px-2 link-dark">CREATEVOTE</a></li>
+            {% else %}
+
+            {% endif %}
+          </ul>
+
+        </header>
+</div>
+
+
+<!-- Navigation-->
+<div class="banner-wall">
+<img class="img-tent" src="{% static 'dist/img/rain.gif' %}">
+</div>
+
+  <div class="container centered">
+ 
+  <div class="row">
+    <div class="column ">
+        <div class="panel panel-default">
+            <div class="poll-heading">
+                <h2 class="panel-title text-white">รายการ{{question}}...</h2>
+            </div>
+                
+            <ul class="list-group" id="style-7" style="height: 260px !important; overflow: scroll; overflow-x: hidden; ">
+                {% if pol %}
+            <table class="table table-bordered">
+                
+                <tbody >
+                {% for questions in pol %}
+                    <tr>
+                        <td scope="row" >
+                            {{questions.question}}
+                        </td>
+                        {% if user.is_authenticated %}
+                        <td >
+                            <a class="btn btn-primary btn-xs" href="{%  url 'letpoll' questions.id %}">poll</a>
+                            {% if request.user|has_group:'votecreator' %}
+                            <a class="btn btn-warning btn-xs" href="{%  url 'editpoll' questions.id %}">Edit</a>
+                            <a class="btn btn-danger btn-xs" href="{%  url 'deletepoll' questions.id%}">Delete</a>
+                            {% endif %}
+                            <a class="btn btn-success btn-xs" href="{%  url 'pollresult' questions.id %}">Report</a>
+                        </td>
+                        {% else %}
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+        {% else %}
+            <p>There is no question available.</p>
+        {% endif %}
+            </ul>
+        </div>  
+    </div>
+
+    <div class="column row gx-4 ">
+      <div class="panel panel-default vote-heading ">
+          <h2 class="panel-title text-red-50">รายการ{{election}}...</h2>
+      </div>
+      <ul class="list-group" id="style-8" style="height: 280px !important; overflow: scroll; overflow-x: hidden; ">
+      {% if ele %}
+       {% for election in ele %}
+            <div class="col mb-5">
+                <div class="vcard h-40 center">
+                {% if election.status == 'OPEN' %}
+                       <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">{{election.status}}</div>
+                {% endif %}
+                    <img src="{{election.picture.url}}" class="img-vote" alt="...">
+                 
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            {{election.name}}
+                        </div>
+                        {% if user.is_authenticated %}
+                        <a class="btn btn-primary btn-xs" href="{%  url 'letelect' election.id %}">vote</a>
+                        
+                            {% if request.user|has_group:'votecreator' %}
+                            <a class="btn btn-warning btn-xs float-right" href="{%  url 'editelect' election.id %}">Edit</a>
+                            <a class="btn btn-danger btn-xs float-right" href="{%  url 'deleteelect' election.id %}">Delete</a>
+                            {% endif %}
+                            <a class="btn btn-success btn-xs float-right" href="{%  url 'electresult' election.id %}">Report</a>
+                        {% else %}
+
+                        {% endif %}    
+                    </div>
+                </div>
+            </div>
+            
+       {% endfor %} 
+       {% else %}
+            <p>There is no Election available.</p>
+        {% endif %}
+        </ul>
+       
+   
+  <!-------------------END Prev-Next----------------------> 
+    </div>
+    </div>
+  </div>
+   {% endblock %}
+  
+ 
+     
+
+
+  

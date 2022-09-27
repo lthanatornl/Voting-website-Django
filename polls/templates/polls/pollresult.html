@@ -1,0 +1,55 @@
+{% extends 'polls/frontdex.html' %}
+{% load static %}
+{% load user_tags %}
+{% block content %}
+
+
+<header class="d-flex justify-content-center py-3 border-bottom">
+          
+            <li class="nav-linv px-2 link-active">Poll Result</a></li>
+            
+          </ul>
+
+        </header>
+</div>
+
+
+<!-- Navigation-->
+<div class="banner-wall">
+    <img class="img-tent" src="{% static 'dist/img/rain.gif' %}">
+        <div class="centered resultp">
+        <h1 class="mb-5 text-center ">ผลโหวต: <h class="display-4">{{question.question}}</h></h1>
+          
+          <ul class="list-poll center">
+    {% for choice in question.choices %}
+        <li class="list-group-item">
+            <span class="badge w3-yellow float-right">{{choice.votes}}</span>
+            {{choice.text}}
+        </li>
+        <!-- <p> ({{choice.votes}})</p> -->
+        {% empty %}
+        <div class="list-group-result">There is no chice available for this question.</div>
+        {% endfor %}
+        <br>
+        <a class="btn btn-danger" href="/vote">Back To Polls</a> 
+        
+    </ul>
+    <br>
+    <div class="col-md-12"><b>Created by: </b> {{question.created_by.first_name}}</div>
+
+</div>
+
+
+
+
+
+
+  <!-------------------END Prev-Next----------------------> 
+  <br><br><br>
+   {% endblock %}
+  
+ 
+     
+
+
+  

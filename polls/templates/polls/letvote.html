@@ -1,0 +1,86 @@
+{% extends 'polls/frontdex.html' %}
+{% load static %}
+{% load user_tags %}
+{% block content %}
+
+
+<header class="d-flex justify-content-center py-3 border-bottom">
+          
+            <li class="nav-linv px-2 link-active">POLL VOTE</a></li>
+            
+          </ul>
+
+        </header>
+</div>
+
+
+<!-- Navigation-->
+<div class="banner-wall">
+<img class="img-tent" src="{% static 'dist/img/rain.gif' %}">
+        
+    <div class="centered ">
+        <div class="panelp panel-default">
+            <div class="panel-heading">
+                <ul class="backen col-12 col-md-auto mb-2 ">
+            <bli class="nav-item">
+        <a href="/vote">
+          <i class="vote-icon fas fa-arrow-circle-left"></i>
+        </a>
+      </bli>
+            </div>
+        </ul>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2 >{{ pollx.question }}</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <hr />
+
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                            <div class="container">
+                            
+                                <div class="row">
+                                    <div class="col"> 
+                                    <lil class="check"><input type="radio" name="poll" value="option1" required>
+                                        {{ pollx.option_one }}  </lil></div>
+                                    <div class="col"> 
+                                    <lil class="check"><input type="radio" name="poll" value="option2">
+                                        {{ pollx.option_two }} </lil></div>
+                                    <div class="w-100"></div> 
+                                    <div class="col"> 
+                                    <lil class="check"><input type="radio" name="poll" value="option3">
+                                        {{ pollx.option_three }} </lil></div> 
+                                    <div class="col"> 
+                                    <lil class="check"><input type="radio" name="poll" value="option4">
+                                        {{ pollx.option_four }} </lil></div>
+                                </div>
+                            </div>
+                               
+                            </div>
+                            
+                            <hr />
+
+                            <button type="submit" class="btn btn-info">
+                                ยืนยัน
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            
+    
+    
+</div>
+<!-- Section-->
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

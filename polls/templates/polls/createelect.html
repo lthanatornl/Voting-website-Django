@@ -1,0 +1,106 @@
+{% extends 'polls/frontdex.html' %}
+{% load static %}
+{% load user_tags %}
+{% block content %}
+
+
+<header class="d-flex justify-content-center py-3 border-bottom">
+          
+            <li class="nav-linv px-2 link-active">ELECTION VOTE</a></li>
+            
+          </ul>
+
+        </header>
+</div>
+
+
+<!-- Navigation-->
+<div class="banner-wall">
+<img class="img-tent" src="{% static 'dist/img/peaceful.gif' %}">
+        <div class="modal-contentv">
+    <div class="modal-headerv">
+<ul class="backen">
+            <bli class="nav-item">
+        <a href="/createvote">
+          <i class="vote-icon fas fa-arrow-circle-left"></i>
+        </a>
+      </bli>
+        
+      <h2 class="center">สร้างโหวตของคุณ..</h2></ul>
+    </div>
+    <div class="modal-bodyv text-dark">
+    <ul class="list-group" id="style-8" style="height: 400px !important; overflow: scroll; overflow-x: hidden; ">
+      <form class="vform" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+      
+      
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width:100px"><p class="w3-large">ชื่อโหวต</p></div>
+            <div class="w3-rest">
+                {{elect_form.name}}
+            </div>
+          </div>
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width:100px"><p class="w3-large">รูปภาพ</p></div>
+            <div class="w3-rest">
+                {{elect_form.picture }}
+            </div>
+          </div>
+        <div class="w3-half w3-section">
+          <div class="w3-col" style="width:100px"><p class="w3-large">วันเริ่มต้น</p></div>
+            <div class="w3-rest">
+                {{elect_form.vote_start }}
+            </div>
+          </div>
+        <div class="w3-half w3-section">
+          <div class="w3-col" style="width:100px"><p class="w3-large">วันสิ้นสุด</p></div>
+            <div class="w3-rest">
+                {{elect_form.vote_end }}
+            </div>
+          </div>
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width:100px"><p class="w3-medium">รายละเอียด</p></i></div>
+            <div class="w3-rest">
+                {{elect_form.introduction }}
+            </div>
+          </div>
+        
+          
+          <table id="id_forms_table" class="table form-table table-bordered table-sm" enctype="multipart/form-data">
+          
+                        <tbody>
+                            {{ formset.management_form }} 
+                            {% for form_data in candy_forms %}
+                                <tr id="{{ form.prefix }}-row" class="dynamic-form">
+                                    <td style="width:20%">
+                                        ชื่อ:{{ form_data.first_name }}
+                                    </td >
+                                    <td style="width:20%">
+                                        นามสกุล:{{ form_data.last_name }}
+                                    </td>
+                                    <td style="width:25%">
+                                    	รูปภาพ:{{ form_data.image }}
+                                    </td>
+                                    <td>
+                                    	รายละเอียด:{{ form_data.biography }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+    
+           </table>
+        <br>
+        <input class="btn btn-danger" type="submit" name="Create vote" value="Create Election" >
+    </form>
+                    
+            
+    
+    
+</div>
+<!-- Section-->
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

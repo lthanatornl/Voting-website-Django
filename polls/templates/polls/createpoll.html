@@ -1,0 +1,61 @@
+{% extends 'polls/frontdex.html' %}
+{% load static %}
+{% load user_tags %}
+{% block content %}
+
+
+<header class="d-flex justify-content-center py-3 border-bottom">
+          
+            <li class="nav-linv px-2 link-active">POLL VOTE</a></li>
+            
+          </ul>
+
+        </header>
+</div>
+
+
+<!-- Navigation-->
+<div class="banner-wall">
+<img class="img-tent" src="{% static 'dist/img/peaceful.gif' %}">
+        <div class="modal-contentp">
+    <div class="modal-headerp">
+    <ul class="backen">
+      <bli class="nav-item">
+        <a href="/createvote">
+          <i class="vote-icon fas fa-arrow-circle-left"></i>
+        </a>
+      </bli>
+      <h2 class="center">สร้างคำถามของคุณ...</h2></ul>
+    </div>
+    <div class="modal-bodyp text-dark">
+    
+      <form class="pform" method="POST" enctype="multipart/form-data" align="center">
+        {% csrf_token %}
+
+                        <div class="center">
+                            <div class="form-group">
+                                <label for="question"><h2>คำถาม...</h2></label>
+                                {{poll_form.question}}
+                            </div>
+                        </div>
+                    
+        <table class="table table-bordered table-light" >
+            {% for form in choice_forms %}
+            <tr><th><label for="id_question">ตัวเลือก:</label></th><td>{{form.text}}</td></tr>
+            {% endfor %}
+        </table>
+                </div>
+        <input class="w3-button w3-section w3-blue w3-ripple w3-padding" type="submit" name="Create vote" value="Create Polls" >
+    </form>
+   
+    </div>
+
+</div>
+<!-- Section-->
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

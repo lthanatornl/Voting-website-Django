@@ -1,0 +1,179 @@
+{% extends 'polls/test.html' %}
+{% load static %}
+{% block content %}
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{% static 'dist/img/a.png' %}" class="img-circle elevation-2" alt="User Image">
+        </div>
+      </div>     
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="/index" class="nav-link">
+              <i class="nav-icon fas fa-home"></i>
+              <p>
+                หน้าหลัก
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/managevote" class="nav-link">
+              <i class="nav-icon fas fa-check-square"></i>
+              <p>
+                จัดการรายการโหวต
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/manageuser" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                จัดการข้อมูลผู้ใช้งาน
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/manageadmin" class="nav-link">
+              <i class="nav-icon fas fa-address-book"></i>
+              <p>
+                จัดการผู้ดูแลระบบ
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-bullhorn"></i>
+              <p>
+                รายงานผลโหวต
+              </p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+ 
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark"><b>Vote Manage</b></h1>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+              <div class="box">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="box-body">
+                       <table id="example1" class="table table-bordered table-striped"><thead><tr class='warning'>
+                        <th width='5%'>No.</th>
+                        <th width='15%'>IMG</th>
+                        <th width='27%'>Title</th>
+                        <th width='20%'>start</th>
+                        <th width='20%'>end</th>
+                        <th width='10%'>Staus</th>
+                        <th width='5%'>Report</th>
+      </tr></thead>
+      {% for vvote in votere %}
+      <tr>
+       <td>{{vvote.id}}</td> 
+       <td><img src="{{vvote.vpic.url}}" width="100%"></td> 
+       <td>{{vvote.vname}}</td> 
+       <td>{{vvote.vstart}}</td>
+       <td>{{vvote.vend}}</td>
+       <td><a href="" class="btn btn-secondary">{{vvote.status}}</a></td>
+       <td>
+ <!--------------------REPORT------------------------>      
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  REPORT
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Report</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div></td>
+  <!-------------------END Report---------------------->
+     </tr>
+      {% endfor %}   
+    </table>      
+        <!-------------------Prev-Next---------------------->                                
+          <nav class="my-4" aria-label="...">
+    <ul class="pagination pagination-circle justify-content-center">
+    {% if votere.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page=1">&laquo First</a> 
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="?page={{ votere.previous_page_number }}">Previous</a> 
+      </li>
+    {% endif %}  
+      <li class="page-item active" aria-current="page">
+        <a class="page-link" href="#">{{ votere.number }} of {{ votere.paginator.num_pages }}</a>
+      </li>
+    {% if votere.has_next %}   
+      <li class="page-item">
+        <a class="page-link" href="?page={{ votere.next_page_number }}">Next</a>  
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="?page={{ votere.paginator.num_pages }}">Last &raquo </a>  
+      </li>
+    {% endif %}
+    </ul>
+  </nav>            
+  <!-------------------END Prev-Next---------------------->                 
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+  </div><!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+    <div class="p-3">
+      <h5>Title</h5>
+      <p>Sidebar content</p>
+    </div>
+  </aside>
+  <!-- /.control-sidebar -->
+{% endblock %}

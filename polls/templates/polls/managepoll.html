@@ -1,0 +1,153 @@
+{% extends 'polls/test.html' %}
+{% load static %}
+{% block content %}
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{% static 'dist/img/a.png' %}" class="img-circle elevation-2" alt="User Image">
+        </div>
+      </div>     
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="/index" class="nav-link">
+              <i class="nav-icon fas fa-home"></i>
+              <p>
+                หน้าหลัก
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/managevote" class="nav-link">
+              <i class="nav-icon fas fa-check-square"></i>
+              <p>
+                จัดการรายการโหวต
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <p class="nav-link active">
+              <i class="nav-icon fas fa-poll"></i>
+              
+                จัดการรายการโพล
+              
+            </p>
+          </li>
+          <li class="nav-item">
+            <a href="/manageadmin" class="nav-link">
+              <i class="nav-icon fas fa-address-book"></i>
+              <p>
+                จัดการผู้ใช้งาน
+              </p>
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+ 
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" >
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark"><b>Manage USER</b></h1>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+              <div class="box">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="box-body">
+                       <table id="example1" class="table table-bordered table-striped"><thead><tr class='warning'>
+                        <th width='5%'>ID</th>
+                        <th width='20%'>คำถาม</th>
+                        <th width='15%'>ผู้สร้าง</th>
+                        <th width='5%'>แก้ไข</th>
+                        <th width='5%'>ลบ</th>
+                      </tr></thead>
+                      {% for poll in pollv %}
+                                  <tr>
+                                    <td>{{poll.id}}</td> 
+                                    <td>{{poll.question}}</td> 
+
+                                    <td>{{poll.created_by.username}} - {{poll.created_by.first_name}}</td>
+                                    <td>
+<!--------------------EDIT------------------------>      
+<a href="{% url 'polledit' poll.id %}" class="btn btn-primary">
+  EDIT
+  </a></td>
+<!-------------------END EDIT---------------------->
+           <!--------------------DELETE------------------------>   
+                                    <td><a href="{% url 'polldelete' poll.id %}" class="btn btn-red">
+                                        DEL
+                                        </a></td> 
+           <!-------------------DELETE END---------------------->
+                                  </tr>
+                      {% endfor %}      
+                                  </table>  
+   <!-------------------Prev-Next---------------------->                                
+          <nav class="my-4" aria-label="...">
+    <ul class="pagination pagination-circle justify-content-center">
+    {% if pollv.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page=1">&laquo First</a> 
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="?page={{ pollv.previous_page_number }}">Previous</a> 
+      </li>
+    {% endif %}  
+      <li class="page-item active" aria-current="page">
+        <a class="page-link" href="#">{{ pollv.number }} of {{ pollv.paginator.num_pages }}</a>
+      </li>
+    {% if pollv.has_next %}   
+      <li class="page-item">
+        <a class="page-link" href="?page={{ pollv.next_page_number }}">Next</a>  
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="?page={{ pollv.paginator.num_pages }}">Last &raquo </a>  
+      </li>
+    {% endif %}
+    </ul>
+  </nav>            
+  <!-------------------END Prev-Next---------------------->  
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+  </div><!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+    <div class="p-3">
+      <h5>Title</h5>
+      <p>Sidebar content</p>
+    </div>
+  </aside>
+  <!-- /.control-sidebar -->
+  
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'polls/frontdex.html' %}
+{% load static %}
+{% load user_tags %}
+{% block content %}
+
+
+<header class="d-flex justify-content-center py-3 border-bottom">
+          
+            <li class="nav-linv px-2 link-active">POLL VOTE</a></li>
+            
+          </ul>
+
+        </header>
+</div>
+
+
+<!-- Navigation-->
+<div class="banner-wall">
+<img class="img-tent" src="{% static 'dist/img/rain.gif' %}">
+        
+    <div class="centered ">
+        <div class="panelp panel-default">
+            <div class="panel-heading">
+                <ul class="backen col-12 col-md-auto mb-2 ">
+            <bli class="nav-item">
+        <a href="/vote">
+          <i class="vote-icon fas fa-arrow-circle-left"></i>
+        </a>
+      </bli>
+            </div>
+        </ul>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2 >{{ question.question }}</h2>
+                    </div>
+                </div>
+
+                <form method="POST" action="{% url 'letpoll' question.id %}">
+        {% csrf_token %}
+    {% for choice in question.choices %}
+        <div class="radio">
+            <label>
+                <input type="radio" name="choice" value="{{choice.id}}">
+                {{choice.text}}
+            </label>
+        </div>
+    {% empty %}
+        <p>There is no chice available for this question.</p>
+    {% endfor %}
+        <input class="w3-button w3-section w3-blue w3-ripple w3-padding" type="submit" name="Create vote" value="vote" >
+    </form>
+            
+    
+    
+</div>
+<!-- Section-->
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
